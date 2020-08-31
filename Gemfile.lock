@@ -1,0 +1,23 @@
+PATH
+  remote: .
+  specs:
+    rack-jwt-decode (0.1.0)
+      jwt
+      rack
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    jwt (2.2.2)
+    rack (2.2.3)
+    rake (12.3.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rack-jwt-decode!
+  rake (~> 12.0)
+
+BUNDLED WITH
+   2.1.4
