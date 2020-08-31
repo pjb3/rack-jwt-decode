@@ -4,12 +4,12 @@ This is a Rack middleware that will look for a [JSON Web Token (JWT)](https://jw
 
 For example, say your application generated a JWT like this:
 
-    >> token = JWT.encode({ sub: 1234, iat: Time.now.utc.to_i }, "secret")
+    >> token = JWT.encode({ sub: 1234, iat: Time.now.utc.to_i }, ENV["APPLICATION_SECRET"])
     => "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEyMzQsImlhdCI6MTU5ODg5ODc3Mn0.MOaM22JkvCi2Bg-vUXAPuYXA9NtsApGNDplRdYMYerw"
 
 Now say that clients pass that token back in an HTTP Header like this:
 
-    Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEyMzQsImlhdCI6MTU5ODg5ODc3Mn0.MOaM22JkvCi2Bg-vUXAPuYXA9NtsApGNDplRdYMYerw
+    curl -v -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEyMzQsImlhdCI6MTU5ODg5ODc3Mn0.MOaM22JkvCi2Bg-vUXAPuYXA9NtsApGNDplRdYMYerw' 'http://localhost:9292'
 
 This middleware would then result in the following additions to the Rack env:
 
@@ -21,7 +21,7 @@ This middleware would then result in the following additions to the Rack env:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rack-jwt-decode'
+gem "rack-jwt-decode"
 ```
 
 And then execute:
@@ -36,7 +36,7 @@ Or install it yourself as:
 
 Configure your Rack application to use this middleware in your Rackup file like this:
 
-    use RackJWTDecode, "secret"
+    use RackJWTDecode, ENV["APPLICATION_SECRET"]
 
 The second argument is the secret key that you used to encode the JWT token.
 
